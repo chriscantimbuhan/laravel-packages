@@ -22,6 +22,11 @@ class UserController extends Controller
         return response()->json($results->get());
     }
 
+    public function options()
+    {
+        return Filters::options(config('user.filters'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
