@@ -12,6 +12,8 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    const ATTR_ROLE_ID = 'role_id';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -44,5 +46,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Attach portal role to web user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\App\Portal\PortalRole\Models\PortalRole>
+     */
+    public function userRole()
+    {
+        return $this->belongsTo(UserRole::class, self::ATTR_ROLE_ID);
     }
 }
