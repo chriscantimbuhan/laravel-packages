@@ -19,6 +19,8 @@ Route::post('/tags', [App\Http\Controllers\ProductCategoryController::class, 'st
 Route::match(['put', 'patch'], '/tags/{' . Tag::ROUTE_KEY . '}', [App\Http\Controllers\ProductCategoryController::class, 'update'])->name('tags.update');
 Route::delete('tags/{' . Tag::ROUTE_KEY . '}', [App\Http\Controllers\ProductCategoryController::class, 'destroy'])->name('tags.destroy');
 
+Route::get('tags/{' . Tag::ROUTE_KEY . '}', [App\Http\Controllers\ProductCategoryController::class, 'show'])->name('tags.show');
+
 Route::resource('product_experiences', App\Http\Controllers\ProductExperienceController::class);
 
 // Products

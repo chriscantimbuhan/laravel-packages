@@ -32,9 +32,13 @@ class ProductCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProductCategory $productCategory)
+    public function show(Tag $tag)
     {
-        //
+        // return $tag->load(['parent']);
+
+        // return $tag->load(['allChildren']);
+
+        return $tag->load(['children']);
     }
 
     /**
