@@ -12,6 +12,11 @@ class ProductCategoryController extends Controller
 {
     use HasTagMethods;
 
+    public function __construct()
+    {
+        request()->headers->set('Accept', 'application/json');
+    }
+
     /**
      * Display a listing of the resource.
      */
