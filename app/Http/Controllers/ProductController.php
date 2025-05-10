@@ -32,11 +32,12 @@ class ProductController extends Controller
         $product->save();
 
         $tags = array_merge(
-            $request->input('product_category', []),
             $request->input('product_experience', [])
         );
 
-        $product->syncTags($tags);
+        $product->syncTags($tags, $request);
+
+        $product->attachTag($request->input('product_category', null), 'product_category');
     }
 
     /**
