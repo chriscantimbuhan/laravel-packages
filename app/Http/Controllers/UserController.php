@@ -74,4 +74,12 @@ class UserController extends Controller
     {
         //
     }
+
+    /**
+     * Rate user
+     */
+    public function rate(Request $request, User $user)
+    {
+        $user->rate($request->input('rating'), $request->input('description'));
+    }
 }

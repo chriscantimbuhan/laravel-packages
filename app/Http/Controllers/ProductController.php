@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Ccantimbuhan\LaravelMedia\Facade\Media;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -31,13 +32,15 @@ class ProductController extends Controller
         $product = new Product;
         $product->save();
 
-        $tags = array_merge(
-            $request->input('product_experience', [])
-        );
+        // $tags = array_merge(
+        //     $request->input('product_experience', [])
+        // );
 
-        $product->syncTags($tags, $request);
+        // $product->syncTags($tags, $request);
 
-        $product->attachTag($request->input('product_category', null), 'product_category');
+        // $product->attachTag($request->input('product_category', null), 'product_category');
+
+        Media::store($request->file('image'), $product);
     }
 
     /**
@@ -45,7 +48,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product->load('tags');
+        $product->load(['tags', 'approvedRatings', 'media']);
 
         $grouped = $product->tags->groupBy('type');
     
@@ -85,5 +88,21 @@ class ProductController extends Controller
         $product->detachAllTags();
 
         $product->delete();
+    }
+
+    /**
+     * Rate product
+     */
+    public function rate(Product $product)
+    {
+        $product->rate(5, 'This is a great product');
+    }
+
+    /**
+     * Average rating of product
+     */
+    public function averageRating(Product $product)
+    {
+        return number_format($product->averageRating() ?? 0, 2);
     }
 }

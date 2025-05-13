@@ -11,6 +11,8 @@
     "require": {
         "php": "^8.2",
         "ccantimbuhan/laravel-filters": "dev-master",
+        "ccantimbuhan/laravel-media": "dev-dev",
+        "ccantimbuhan/laravel-ratings": "dev-dev",
         "ccantimbuhan/laravel-tags": "dev-master",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1"
@@ -85,6 +87,14 @@
         {
             "type": "path",
             "url": "packages/laravel-tags"
+        },
+        {
+            "type": "path",
+            "url": "packages/laravel-ratings"
+        },
+        {
+            "type": "path",
+            "url": "packages/laravel-media"
         }
     ]
 }

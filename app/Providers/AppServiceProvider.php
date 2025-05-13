@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,7 +23,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Relation::morphMap([
-            (new Product)->getTaggableType() => Product::class
+            (new Product)->getTaggableType() => Product::class,
+            (new User)->getRatableType() => User::class
         ]);
 
     }
