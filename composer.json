@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "ccantimbuhan/laravel-actions": "dev-dev",
         "ccantimbuhan/laravel-audit-logs": "dev-dev",
         "ccantimbuhan/laravel-filters": "dev-master",
         "ccantimbuhan/laravel-media": "dev-dev",
@@ -100,6 +101,10 @@
         {
             "type": "path",
             "url": "packages/laravel-audit-logs"
+        },
+        {
+            "type": "path",
+            "url": "packages/laravel-actions"
         }
     ]
 }

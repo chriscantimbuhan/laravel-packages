@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\User;
+use App\Product\Actions\DestroyProduct;
+use App\Product\Actions\StoreOrUpdateProduct;
 use Ccantimbuhan\LaravelAuditLogs\Traits\HasAuditLogMethods;
 use Ccantimbuhan\LaravelMedia\Facade\Media;
 use Illuminate\Http\Request;
@@ -34,28 +36,31 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        Auth::setUser(User::whereKey(1)->first());
+        (new StoreOrUpdateProduct)->setRequest($request)->execute();
 
-        $product = new Product;
-        $product->save();
 
-        // $tags = array_merge(
-        //     $request->input('product_experience', [])
-        // );
+        // Auth::setUser(User::whereKey(1)->first());
 
-        // $product->syncTags($tags, $request);
+        // $product = new Product;
+        // $product->save();
 
-        // $product->attachTag($request->input('product_category', null), 'product_category');
+        // // $tags = array_merge(
+        // //     $request->input('product_experience', [])
+        // // );
 
-        if ($request->file('image')) {
-            Media::store($request->file('image'), $product);
-        }
+        // // $product->syncTags($tags, $request);
 
-        $this->setLogRequest($request)
-            ->setLogModel($product)
-            ->setLogRemarks('Create Product')
-            ->setLogAction('Login')
-            ->storeLog();
+        // // $product->attachTag($request->input('product_category', null), 'product_category');
+
+        // if ($request->file('image')) {
+        //     Media::store($request->file('image'), $product);
+        // }
+
+        // $this->setLogRequest($request)
+        //     ->setLogModel($product)
+        //     ->setLogRemarks('Create Product')
+        //     ->setLogAction('Login')
+        //     ->storeLog();
     }
 
     /**
@@ -100,9 +105,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->detachAllTags();
+        (new DestroyProduct($product))->execute();
 
-        $product->delete();
+        // $product->detachAllTags();
+
+        // $product->delete();
     }
 
     /**
