@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Ccantimbuhan\LaravelAuditLogs\Traits\HasAuditLog;
 use Ccantimbuhan\LaravelMedia\Traits\HasMedia;
 use Ccantimbuhan\LaravelRatings\Traits\HasRatings;
 use Ccantimbuhan\LaravelTags\Contracts\Taggable;
@@ -13,6 +14,7 @@ class Product extends Model implements Taggable
     use HasTags;
     use HasRatings;
     use HasMedia;
+    use HasAuditLog;
 
     const ROUTE_KEY = 'product';
 }

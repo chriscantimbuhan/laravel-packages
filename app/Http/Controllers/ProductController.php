@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
+use Ccantimbuhan\LaravelAuditLogs\Traits\HasAuditLogMethods;
 use Ccantimbuhan\LaravelMedia\Facade\Media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+    use HasAuditLogMethods;
+
     /**
      * Display a listing of the resource.
      */
@@ -29,6 +34,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        Auth::setUser(User::whereKey(1)->first());
+
         $product = new Product;
         $product->save();
 
@@ -40,7 +47,15 @@ class ProductController extends Controller
 
         // $product->attachTag($request->input('product_category', null), 'product_category');
 
-        Media::store($request->file('image'), $product);
+        if ($request->file('image')) {
+            Media::store($request->file('image'), $product);
+        }
+
+        $this->setLogRequest($request)
+            ->setLogModel($product)
+            ->setLogRemarks('Create Product')
+            ->setLogAction('Login')
+            ->storeLog();
     }
 
     /**

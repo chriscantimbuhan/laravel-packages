@@ -7,4 +7,5 @@ return [
     Ccantimbuhan\LaravelTags\LaravelTagServiceProvider::class,
     Ccantimbuhan\LaravelRatings\LaravelRatingServiceProvider::class,
     Ccantimbuhan\LaravelMedia\LaravelMediaServiceProvider::class,
+    Ccantimbuhan\LaravelAuditLogs\LaravelAuditLogServiceProvider::class,
 ];
